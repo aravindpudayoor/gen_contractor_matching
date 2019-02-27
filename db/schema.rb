@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20190227095941) do
     t.float    "max_budget",             limit: 24
     t.boolean  "offers_design_service"
     t.boolean  "offers_build_service"
+    t.integer  "rating",                 limit: 4,   default: 0
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
   end

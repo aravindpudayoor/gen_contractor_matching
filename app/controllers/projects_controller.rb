@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: :index
-  before_action :get_project, only: :edit, :update, :near_by_contractors
+  before_action :get_project, only: [:edit, :update, :near_by_contractors]
 
   def index
   	@projects = Project.all

@@ -14,10 +14,9 @@ class Project < ActiveRecord::Base
   ## Below method to fetch all the contractors with in 5 miles radius
   def near_by_contractors
   	relation = Contractor.within(5, origin: [self.latitude, self.longitude])
-    relation = relation.where("(contractors.min_budget >= #{self.min_budget} OR contractors.max_budget <= #{self.max_budget}) 
-      AND (contractors.offers_design_service = #{self.design_service} OR contractors.offers_build_service = #{self.build_service})")
+    relation = relation.where("(#{self.min_budget} BETWEEN contractors.min_budget AND contractors.max_budget) OR (#{self.max_budget} BETWEEN contractors.min_budget AND contractors.max_budget)")
     relation = self.declined_contractors.blank? ? relation : relation.where.not(id: self.declined_contractors.pluck(:contractor_id))
-    relation
+    relation.order(rating: :desc)
   end
 
   ["pending", "assigned", "wip", "closed"].each do |proj_status|

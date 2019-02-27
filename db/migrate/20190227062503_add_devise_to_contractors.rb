@@ -38,7 +38,7 @@ class AddDeviseToContractors < ActiveRecord::Migration
       t.float :max_budget
       t.boolean :offers_design_service
       t.boolean :offers_build_service
-
+      t.integer :rating, default: 0
       # Uncomment below if timestamps were not included in your original model.
       t.timestamps null: false
     end
@@ -52,6 +52,6 @@ class AddDeviseToContractors < ActiveRecord::Migration
   def self.down
     # By default, we don't want to make any assumption about how to roll back a migration when your
     # model already existed. Please edit below which fields you would like to remove in this migration.
-    raise ActiveRecord::IrreversibleMigration
+    # raise ActiveRecord::IrreversibleMigration
   end
 end
