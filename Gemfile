@@ -24,7 +24,7 @@ gem 'friendly_id', '5.2.0'
 gem 'font-awesome-sass', '4.7.0'
 
 # Bootstrap 3: https://github.com/twbs/bootstrap-sass
-gem 'bootstrap-sass', '3.3.7'
+gem 'bootstrap-sass', ">= 3.4.1"
 
 group :development, :test do
   gem 'byebug', '9.0.6'
