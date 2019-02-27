@@ -1,0 +1,39 @@
+<% title("User Projects") %>
+<h1>Projects <small><%= current_user.email %></small></h1>
+<p><%#= link_to "Back to Admin", admin_root_path %></p>
+
+<%#= form_tag admin_users_path, method: 'get', html: {role: "form"} do %>
+<p>
+  <%#= text_field_tag :search, params[:search] %>
+  <%#= submit_tag "Search", :name => nil, class: "btn btn-sm btn-primary" %>
+  <%#= link_to "All", admin_users_path, {class: "btn btn-sm btn-link"} %>
+</p>
+<%# end %>
+
+<table class="table table-striped">
+  <tr>
+    <th>Title</th>
+    <th>Location</th>
+    <th>Budget($)</th>
+    <th>Type Of Service</th>
+    <th>Created At</th>
+    <th>Status</th>
+    <th>Contractors Near by</th>
+    <th>Action</th>
+    <th>Contractor</th>
+  </tr>
+
+  <% @projects.each do |project| %>
+    <tr>
+      <td><%= project.title %></td>
+      <td><%= "#{project.latitude}, #{project.longitude}"  %></td>
+      <td><%= "#{project.min_budget} - #{project.max_budget}" %></td>
+      <td><%= project.design_service? ? "Design Service" : project.build_service? ? "Build Service" : "NA" %></td>
+      <td><%= project.created_at.to_date %></td>
+      <td><%= project.status.capitalize  %></td>
+      <td><%= link_to project.near_by_contractors.count, near_by_contractors_projects_path(id: project.id) if project.pending? %></td>
+      <td><%= link_to "Edit", edit_project_path(id: project.id) if project.pending? %></td>
+      <td><%= project.contractor.name if project.contractor %></td>
+    </tr>
+  <% end %>
+</table>

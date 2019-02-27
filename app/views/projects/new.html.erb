@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h1>New Project</h1>
+
+    <%= form_for(@project, :as => :project,
+    :url => projects_path, method: :POST,
+    :html => { :role => "form" }) do |f| %>
+
+      <%= render partial: 'project_fields', locals: {f: f} %>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.submit "Create", class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

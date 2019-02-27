@@ -1,0 +1,43 @@
+<% title("User Projects") %>
+<h1>Projects <small>Admin</small></h1>
+<p><%#= link_to "Back to Admin", admin_root_path %></p>
+
+<%#= form_tag admin_users_path, method: 'get', html: {role: "form"} do %>
+<p>
+  <%#= text_field_tag :search, params[:search] %>
+  <%#= submit_tag "Search", :name => nil, class: "btn btn-sm btn-primary" %>
+  <%#= link_to "All", admin_users_path, {class: "btn btn-sm btn-link"} %>
+</p>
+<%# end %>
+
+<table class="table table-striped">
+  <tr>
+    <th>Title</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>Min Budget</th>
+    <th>Max Budget</th>
+    <th>Type Of Service</th>
+    <th>Created At</th>
+  </tr>
+
+  <% @projects.each do |project| %>
+
+  <tr>
+    <td><%= project.title %></td>
+    <td><%= project.latitude %></td>
+    <td><%= project.longitude %></td>
+    <td><%= project.min_budget %></td>
+    <td><%= project.max_budget %></td>
+    <td><%= project.design_service? ? "Design Service" : project.build_service? ? "Build Service" : "NA" %></td>
+    <td><%= project.created_at.to_date %></td>
+  </tr>
+
+  <% end %>
+
+</table>
+<!-- 
+<div class="text-center">
+  <p><%#= page_entries_info @users %></p>
+  <%#= paginate @users %>
+</div> -->

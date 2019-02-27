@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h1>Edit Profile</h1>
+
+    <%= form_for(@contractor, :as => 'contractor',
+    :url => update_profile_contractors_path(id: @contractor.id), method: :post,
+    :html => { :role => "form" }) do |f| %>
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-12">
+          <%= f.label :Location %>
+        </div>
+        <div class="col-sm-3">
+          <%= f.label :latitude %>
+          <%= f.text_field :latitude, class: "form-control" %>
+        </div>
+        <div class="col-sm-3">
+          <%= f.label :longitude %>
+          <%= f.text_field :longitude, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-12">
+          <%= f.label :budget %>
+        </div>
+        <div class="col-sm-3">
+          <%= f.label :min_budget %>
+          <%= f.text_field :min_budget, class: "form-control" %>
+        </div>
+        <div class="col-sm-3">
+          <%= f.label :max_budget %>
+          <%= f.text_field :max_budget, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-12">
+          <%= f.label :type_of_services_offerd %>
+        </div>
+        <div class="col-sm-3">
+          <%= f.label :offers_design_service %>
+          <%= f.check_box :offers_design_service, class: "form-control" %>
+        </div>
+        <div class="col-sm-3">
+          <%= f.label :offers_build_service %>
+          <%= f.check_box :offers_build_service, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <%= f.submit "Update", class: "btn btn-primary" %>
+      </div>
+    </div>
+    <% end %>
+
+  </div>
+</div>

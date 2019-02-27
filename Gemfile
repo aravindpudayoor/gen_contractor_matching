@@ -41,10 +41,9 @@ group :development, :test do
 end
 
 
-# SQLite 3
-group :development, :test do
-  gem 'sqlite3', '1.3.11'
-end
+gem 'mysql2', '~> 0.3.18'
 
 # Devise: https://github.com/plataformatec/devise
 gem 'devise', '3.5.3'
+
+gem 'geokit-rails'

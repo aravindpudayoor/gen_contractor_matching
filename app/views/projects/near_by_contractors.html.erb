@@ -1,0 +1,51 @@
+<% title("Near By Contractors") %>
+<h1>Contractors <small></small></h1>
+<p><%#= link_to "Back to Admin", admin_root_path %></p>
+
+<%#= form_tag admin_users_path, method: 'get', html: {role: "form"} do %>
+<p>
+  <%#= text_field_tag :search, params[:search] %>
+  <%#= submit_tag "Search", :name => nil, class: "btn btn-sm btn-primary" %>
+  <%#= link_to "All", admin_users_path, {class: "btn btn-sm btn-link"} %>
+</p>
+<%# end %>
+
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Min Budget</th>
+    <th>Max Budget</th>
+    <th>Type Of Services</th>
+    <th>Actions</th>
+  </tr>
+
+  <% @contractors.each do |contractor| %>
+    <% if contractor.projects.count < 3  %>
+      <tr>
+        <td><%= contractor.name %></td>
+        <td><%= contractor.min_budget %></td>
+        <td><%= contractor.max_budget %></td>    
+        <td>
+          <% if contractor.offers_design_service? && contractor.offers_build_service? %>
+            Design and Build Services
+          <% elsif !contractor.offers_design_service? && contractor.offers_build_service? %>
+            Build Service
+          <% elsif contractor.offers_design_service? && !contractor.offers_build_service? %>
+            Design Service
+          <% else %>
+            NA
+          <% end %>
+        </td>
+        <td>
+          <%= link_to "Assign", assign_contractor_projects_path(project: @project.id, contractor: contractor.id) %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+
+</table>
+<!-- 
+<div class="text-center">
+  <p><%#= page_entries_info @users %></p>
+  <%#= paginate @users %>
+</div> -->

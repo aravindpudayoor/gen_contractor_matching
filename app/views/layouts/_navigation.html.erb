@@ -11,7 +11,16 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <%= render 'layouts/navigation_links' %>
+        <% if user_signed_in? %>
+          <%= render 'layouts/navigation_links' %>
+        <% elsif contractor_signed_in? %>
+          <%= render 'layouts/contractor_navigation_links' %>
+        <% else %>
+          <li><%= link_to "User Sign in", new_user_session_path %></li>
+          <li><%= link_to "User Sign up", new_user_registration_path %></li>
+          <li><%= link_to "Contractor Sign in", new_contractor_session_path %></li>
+          <li><%= link_to "Contractor Sign up", new_contractor_registration_path %></li>
+        <% end %>
       </ul>
     </div>
   </div>

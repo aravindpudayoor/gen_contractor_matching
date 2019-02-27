@@ -1,0 +1,46 @@
+<% title("My Projects") %>
+<h1>Projects <small><%= current_contractor.email %></small></h1>
+<p><%#= link_to "Back to Admin", admin_root_path %></p>
+
+<%#= form_tag admin_users_path, method: 'get', html: {role: "form"} do %>
+<p>
+  <%#= text_field_tag :search, params[:search] %>
+  <%#= submit_tag "Search", :name => nil, class: "btn btn-sm btn-primary" %>
+  <%#= link_to "All", admin_users_path, {class: "btn btn-sm btn-link"} %>
+</p>
+<%# end %>
+
+<table class="table table-striped">
+  <tr>
+    <th>Title</th>
+    <th>Location</th>
+    <th>Budget($)</th>
+    <th>Type Of Service</th>
+    <th>Created At</th>
+    <th>Status</th>
+    <th>Home Owner</th>
+    <th>Action</th>
+  </tr>
+
+  <% @projects.each do |project| %>
+    <tr>
+      <td><%= project.title %></td>
+      <td><%= "#{project.latitude}, #{project.longitude}"  %></td>
+      <td><%= "#{project.min_budget} - #{project.max_budget}" %></td>
+      <td><%= project.design_service? ? "Design Service" : project.build_service? ? "Build Service" : "NA" %></td>
+      <td><%= project.created_at.to_date %></td>
+      <td><%= project.status.capitalize  %></td>
+      <td><%= project.user.email %></td>
+      <td>
+        <%= link_to "Accept", accept_project_contractors_path(id: project.id, status: 'accepted') if project.assigned? %>
+        <%= link_to "Deline", accept_project_contractors_path(id: project.id, status: 'declined') if project.assigned? %>
+      </td>
+    </tr>
+  <% end %>
+
+</table>
+<!-- 
+<div class="text-center">
+  <p><%#= page_entries_info @users %></p>
+  <%#= paginate @users %>
+</div> -->

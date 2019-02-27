@@ -1,0 +1,13 @@
+
+
+<% if !contractor_signed_in? %>
+		<li><%= link_to "Sign in", new_user_session_path %></li>
+		<li><%= link_to "Sign up", new_user_registration_path %></li>
+<% else %>
+	<li><%= link_to "Protected Page", inside_path %></li>
+	<li><%= link_to "Edit your account", edit_profile_contractors_path(id: current_contractor.id) %></li>
+	<li><%= link_to "My Projects", my_projects_contractors_path %></li>
+	<!-- <li><%#= link_to "Add Project", new_project_path %></li>
+	<li><%#= link_to "My Projects", my_projects_projects_path %></li> -->	
+	<li><%= link_to "Sign out", destroy_contractor_session_path, data:{method: :delete} %></li>
+<% end %>
